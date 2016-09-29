@@ -1,4 +1,4 @@
-# IkiWiki::Plugin::wikilink
+# IkiWiki::Plugin::wikiurl
 
 Plugin for outputting the path of IkiWiki `[[WikiLinks]]` as pure text.
 
