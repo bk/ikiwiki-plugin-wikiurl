@@ -25,6 +25,7 @@ sub wikiurl {
     my $pagename = $params{page};
     my $destpage = $params{destpage};
     my $is_preview = $params{preview};
+    my $absolute = 0;
 
     my $bestlink = bestlink($pagename, $link);
 
@@ -37,11 +38,14 @@ sub wikiurl {
             if ($bestlink =~ /<a /i && $bestlink =~ / href="(.*?)"/i) {
                 $bestlink = $1;
             }
+            $absolute = 1;
         }
     }
-    $bestlink = IkiWiki::abs2rel(
-        $bestlink, IkiWiki::dirname(htmlpage($destpage)));
-    $bestlink = IkiWiki::beautify_urlpath($bestlink);
+    unless ($absolute) {
+        $bestlink = IkiWiki::abs2rel(
+            $bestlink, IkiWiki::dirname(htmlpage($destpage)));
+        $bestlink = IkiWiki::beautify_urlpath($bestlink);
+    }
 
     return $bestlink;
 }
